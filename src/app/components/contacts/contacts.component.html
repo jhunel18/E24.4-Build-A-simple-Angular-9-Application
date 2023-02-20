@@ -1,0 +1,102 @@
+<div class = "container">
+    <h2 class = "text-center">Contact Information
+      <button type="button" class="btn btn-primary btn-sm float-right" data-bs-toggle="modal" data-bs-target="#modalAdd">
+        Add Data
+      </button>
+    </h2>
+
+    <div class="wrapper" *ngIf = "selectedContact">
+      <form>
+        <h5>Update Contact</h5>
+        <div class="row">
+          <div class="col">
+            <input type="fname" class="form-control form-control-sm" name="name" [(ngModel)]="selectedContact.name">
+          </div>
+          <div class="col">
+            <input type="text" class="form-control form-control-sm" name = "phone"[(ngModel)]="selectedContact.phone">
+          </div>
+          <div class="col">
+            <select class = "form-select form-select-sm" name = "contactType" [(ngModel)]="selectedContact.contactType">
+              <option value = "Friends">Friends</option>
+              <option value = "Family">Family</option>
+              <option value = "Work" >Work</option>
+            </select>
+          </div>
+
+          
+        </div>
+      </form>
+</div>
+
+
+    </div>
+
+   
+     <div class = "container">
+      <h5 class = "text-center">MyContacts</h5>
+    <div class = "col-md-12">
+            
+              <table class= "table table-striped">
+                <tr>
+                    <th>Name</th>
+                    <th>Phone Number</th>
+                    <th>Contact Type</th>
+                    <th>Action</th>
+                </tr>
+                <tr *ngFor = "let contact of contacts; let i=index">
+                    <td>{{contact.name}}</td>
+                    <td>{{contact.phone}}</td>
+                    <td>{{contact.contactType}}</td>
+                    <td>     
+                        <span><a href="#" class = "btn btn-info btn-sm" [class.selected] = "contact === selectedContact"
+                          (click)="updateContact(contact)" >Edit</a></span>
+                        <span><button class = "btn btn-danger btn-sm"(click)="deleteContact(i)">Delete</button></span>
+                    </td>
+                </tr>
+              </table>             
+        </div>
+</div>
+
+
+<!-- Button trigger modal -->
+
+<!-- Modal -->
+<div class="modal fade" id="modalAdd" tabindex="-1" aria-labelledby="modalAdd" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add Contact Form</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="row">
+            <div class="col">
+              <input type="fname" class="form-control form-control-sm" placeholder="Enter Full Name" id="fname" name="fname" [(ngModel)]="cName" required>
+            </div>
+            <div class="col">
+              <input type="text" class="form-control form-control-sm" placeholder="Enter Phone" id="phone" name = "phone" [(ngModel)]="cPhone" required>
+            </div>
+            <div class="col">
+              <select class = "form-select form-select-sm" name = "contactType" [(ngModel)]="cType" required>
+                <option value = "Friends">Friends</option>
+                <option value = "Family">Family</option>
+                <option value = "Work" >Work</option>
+              </select>
+            </div>
+            <!-- <div class="col">
+              <button type="submit" class="btn btn-primary btn-sm" (click)="addContact()" >Submit</button>
+            </div> -->
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" (click)="addContact()">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
